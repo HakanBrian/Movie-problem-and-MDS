@@ -1,0 +1,35 @@
+students,movie,score,rank
+1,Inception,8.0,1
+4,Inception,8.0,1
+4,Spirited Away,8.0,2
+4,Pulp Fiction,8.0,3
+6,Pulp Fiction,8.0,1
+7,Inception,9.0,1
+7,Spirited Away,9.0,2
+7,Harry Potter,8.0,3
+7,The Hangover,8.0,4
+11,Spirited Away,8.0,1
+13,Pulp Fiction,8.0,1
+14,Spirited Away,9.0,1
+14,Titanic,8.0,2
+14,The Notebook,8.0,3
+14,The Hangover,8.0,4
+14,Pulp Fiction,8.0,5
+15,Pulp Fiction,8.0,1
+15,The Notebook,8.0,2
+16,Inception,8.0,1
+16,Spirited Away,8.0,2
+19,Spirited Away,8.0,1
+19,The Hangover,8.0,2
+20,Inception,10.0,1
+20,Spirited Away,10.0,2
+20,Pulp Fiction,10.0,3
+23,Inception,9.0,1
+23,Spirited Away,9.0,2
+23,Pulp Fiction,9.0,3
+25,The Hangover,8.0,1
+26,Spirited Away,9.0,1
+26,Pulp Fiction,8.0,2
+27,Inception,9.0,1
+27,Spirited Away,8.0,2
+27,Titanic,8.0,3
