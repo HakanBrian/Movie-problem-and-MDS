@@ -9,10 +9,10 @@ df = df.drop(df.columns[[0]], axis=1)
 
 def matrix_completion(df_obs: pd.DataFrame) -> pd.DataFrame:
     # convert to numpy
-    M_obs = df.values
+    M_obs = df_obs.values
     mask = ~np.isnan(M_obs)
 
-    m, n = df.shape
+    m, n = df_obs.shape
 
     # CVXPY optimization variable
     X = cp.Variable((m, n))
@@ -24,9 +24,9 @@ def matrix_completion(df_obs: pd.DataFrame) -> pd.DataFrame:
     prob = cp.Problem(cp.Minimize(cp.normNuc(X)), constraints)
     prob.solve(solver=cp.SCS, verbose=False)
 
-    # Convert back to DataFrame
+    # convert back to DataFrame
     M_completed = np.rint(X.value)
-    df_completed = pd.DataFrame(M_completed, index=df.index, columns=df.columns)
+    df_completed = pd.DataFrame(M_completed, index=df_obs.index, columns=df_obs.columns)
 
     return df_completed
 
@@ -66,7 +66,7 @@ def topk_recommendations(df_obs: pd.DataFrame,
     movies_flat = movies[topk_sorted.ravel()]
     scores_flat = scores[row_indices, topk_sorted].ravel()
 
-    # Filter out rows where everything was -inf (no valid recs)
+    # filter out rows where everything was -inf (no valid recs)
     valid = np.isfinite(scores_flat)
     out = pd.DataFrame({
         "students": students[valid],
@@ -74,7 +74,7 @@ def topk_recommendations(df_obs: pd.DataFrame,
         "score": scores_flat[valid],
     })
 
-    # Add rank within each students
+    # add rank within each students
     out["rank"] = out.groupby("students")["score"].rank(ascending=False, method="first").astype(int)
     out = out.sort_values(["students", "rank"]).reset_index(drop=True)
     return out

@@ -37,12 +37,12 @@ city_airports = {
     "Anchorage": ["ANC"]
 }
 
-# filter to just the airports you need
+# filter airports
 needed = {a for lst in city_airports.values() for a in lst}
 air_subset = air[air["iata"].isin(needed)].set_index("iata")[["lat","lon"]]
 
 # compute pairwise great-circle distance (Haversine)
-R = 3958.7613  # Earth radius in miles
+R = 3958.7613  # earth radius in miles
 def haversine(lat1, lon1, lat2, lon2):
     φ1, λ1, φ2, λ2 = map(radians, [lat1, lon1, lat2, lon2])
     dφ = φ2 - φ1
@@ -66,5 +66,5 @@ for c1, c2 in product(cities, cities):
             best = min(best, haversine(lat1, lon1, lat2, lon2))
     D.loc[c1, c2] = best
 
-# D is the symmetric distance matrix in miles for MDS
+# symmetric distance matrix in miles for MDS
 D.to_csv("flight_distances.csv")

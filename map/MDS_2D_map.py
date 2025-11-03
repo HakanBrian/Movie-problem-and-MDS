@@ -22,7 +22,7 @@ pos = w > 1e-9
 w, V = w[pos], V[:, pos]
 r = min(2, len(w))
 X = V[:, :r] * np.sqrt(w[:r])  # coordinates (n x r)
-X = -X  # Make the map look familiar
+X = -X  # invert map to make it look familiar
 
 # visualize
 # shared bounds + aspect
@@ -46,7 +46,7 @@ fig.tight_layout()
 fig.savefig("map/figures/MDS_2D_map.png", bbox_inches="tight", dpi=300)
 
 
-# Range of k values to evaluate
+# range of k values to evaluate
 K = range(1, 10)
 inertias = []
 
@@ -81,12 +81,12 @@ fig2, ax2 = plt.subplots(figsize=(8,6))
 ax2.scatter(X[:,0], X[:,1], c=clusters, cmap="tab10", s=80)
 for i, name in enumerate(X_labels):
     ax2.text(X[i,0]+0.01, X[i,1]+0.01, name, fontsize=8)
-setup_axes(ax2, "K-means clustering of cities (k={k})")
+setup_axes(ax2, f"K-means clustering of cities (k={len(set(km.labels_))})")
 fig2.tight_layout()
 fig2.savefig("map/figures/kmeans_clustering.png", bbox_inches="tight", dpi=300)
 
 
-# build Voronoi from cluster centers
+# build voronoi from cluster centers
 centers = km.cluster_centers_
 vor = Voronoi(centers)
 
